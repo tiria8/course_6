@@ -1,0 +1,64 @@
+<div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom box-shadow">
+    <nav class="ms-5">
+        <div class="col">
+            <div class="card bg-warning shadow-sm">
+                <div style="background-color:#F0E68C;">
+                    <div class="card-body">
+                        <a class="p-2 btn btn-secondary" href="{% url 'mailing:home' %}">Главная</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <nav class="ms-5">
+        <div class="col">
+            <div class="card bg-warning shadow-sm">
+                <div style="background-color:#F0E68C;">
+                    <div class="card-body">
+                        <a class="p-2 btn btn-outline-primary" href="{% url 'mailing:mailing_list' %}">Рассылки</a>
+
+                        <a class="p-2 btn btn-outline-success" href="{% url 'blog:blog_list' %}">Блог</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <nav class="ms-5">
+        <div class="col">
+            <div class="card bg-warning shadow-sm">
+                <div style="background-color:#F0E68C;">
+                    <div class="card-body">
+
+                        {% if request.user.is_authenticated %}
+                        <div class="badge badge-primary text-wrap text-body" style="width: 10rem;">
+                            Привет, {{ request.user.email }}
+                        </div>
+                        <a class="p-2 btn btn-outline-primary" href="{% url 'users:logout' %}">Выйти</a>
+                        <a class="p-2 btn btn-outline-primary" href="{% url 'users:profile' %}">Профиль</a>
+                        {% else %}
+                        <div class="badge badge-primary text-wrap text-body" style="width: 10rem;">
+                            Войдите в свой аккаунт или зарегистрируйтесь
+                        </div>
+                        <a class="p-2 btn btn-outline-primary" href="{% url 'users:login' %}">Войти</a>
+                        <a class="p-2 btn btn-outline-primary" href="{% url 'users:register' %}">Регистрация</a>
+                        {% endif %}
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+{% if request.user.is_staff %}
+    <nav class="ms-5">
+        <div class="col">
+            <div class="card bg-warning shadow-sm">
+                <div style="background-color:#F0E68C;">
+                    <div class="card-body">
+                        <a class="p-2 btn btn-outline-primary" href="{% url 'users:user_list' %}">Пользователи</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+{% endif %}
+</div>
